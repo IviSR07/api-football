@@ -15,7 +15,10 @@ def get_teams():
     real_madrid=Team("Real Madrid","Santiago Bernabéu")
     almeria=Team("Almería","Power House Stadium")
     barcelona=Team("Barcelona")
-    return [real_madrid,barcelona,{"name":"Atlético de Madrid"},almeria]
+    atletico_de_madrid=Team("Atlético de Madrid")
+    sevilla=Team("Sevilla")
+athletic_club_de_bilbao=Team("Athletic Club de Bilbao")
+    return [real_madrid,barcelona,atletico_de_madrid,almeria]
 
 @app.get("/matches")
 def get_matches():
