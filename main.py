@@ -25,4 +25,5 @@ def get_teams():
 
 @app.get("/matches")
 def get_matches():
+    real_madrid_vs_almeria=Match("Real Madrid","Almería")
     return [{"local":"Real Madrid","visitante":"Almería"}]
