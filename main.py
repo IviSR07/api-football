@@ -3,6 +3,8 @@ from typing import Union
 
 from fastapi import FastAPI
 from team import Team
+from match import Match
+from player import Player
 app = FastAPI()
 print("API FOOTBALL")
 
@@ -27,3 +29,14 @@ def get_teams():
 def get_matches():
     real_madrid_vs_almeria=Match("Real Madrid","Almería")
     return [real_madrid_vs_almeria]
+
+
+@app.get("/players")
+def get_players():
+    players=[]
+    name_players=[]
+    players.append(Player("Benzema","Real Madrid"))
+    vinicius_jr=Player("Vinicius Jr","Real Madrid")
+    name_players.append(vinicius_jr.name)
+    players.append(vinicius_jr)
+    return name_players
