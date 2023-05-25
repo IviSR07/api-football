@@ -2,11 +2,15 @@
 from typing import Union
 
 from fastapi import FastAPI
-from team import Team
-from match import Match
-from player import Player
+from domain.team import Team
+from domain.match import Match
+from domain.player import Player
+from domain.team_repository import TeamRepository
 app = FastAPI()
 print("API FOOTBALL")
+
+## Repositories
+repository_teams=TeamRepository()
 
 @app.get("/")
 def info():
@@ -14,20 +18,18 @@ def info():
 
 @app.get("/teams")
 def get_teams():
-    real_madrid=Team("Real Madrid","Santiago Bernabéu")
-    almeria=Team("Almería","Power House Stadium")
-    barcelona=Team("Barcelona")
-    atletico_de_madrid=Team("Atlético de Madrid")
-    sevilla=Team("Sevilla")
-    real_sociedad=("Real Sociedad")
-    athletic_club_de_bilbao=Team("Athletic Club de Bilbao")
-    betis=Team("Betis")
-    return [real_madrid,barcelona,almeria,atletico_de_madrid,sevilla,real_sociedad,athletic_club_de_bilbao,betis]
+    return repository_teams.get()
 
+@app.get("/random")
+def get_teams():
+    # This is a use case:
+    cosa=Team("Iván","Su casa")
+    repository_teams.add(cosa)
+    return repository_teams.get()
 
 @app.get("/matches")
 def get_matches():
-    real_madrid_vs_almeria=Match("Real Madrid","Almería")
+    real_madrid_vs_almeria=Match("Real Madrid",4,"Almería",2)
     return [real_madrid_vs_almeria]
 
 
@@ -40,3 +42,28 @@ def get_players():
     name_players.append(vinicius_jr.name)
     players.append(vinicius_jr)
     return name_players
+
+@app.get("/pichichi")
+def get_pichichi():
+    return [{
+        "name": "Benzema",
+        "team": "Real Madrid",
+        "goals": 8
+    },
+    {
+        "name": "Modric",
+        "team": "Real Madrid",
+        "goals": 4
+    }]
+
+@app.get("/general_clasification")
+def get_general_clasification():
+    return [{
+        "number": 1,
+        "name": "Barcelona",
+        "points": 85
+    },{
+        "number": 2,
+        "name": "Real Madrid",
+        "points": 71        
+    }]
