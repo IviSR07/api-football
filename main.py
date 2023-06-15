@@ -16,32 +16,10 @@ repository_teams=TeamRepository()
 def info():
     return {"Project": "API FOOTBALL"}
 
-@app.get("/teams")
-def get_teams():
-    return repository_teams.get()
-
-@app.get("/random")
-def get_teams():
-    # This is a use case:
-    cosa=Team("Iván","Su casa")
-    repository_teams.add(cosa)
-    return repository_teams.get()
-
 @app.get("/matches")
 def get_matches():
     real_madrid_vs_almeria=Match("Real Madrid",4,"Almería",2)
     return [real_madrid_vs_almeria]
-
-
-@app.get("/players")
-def get_players():
-    players=[]
-    name_players=[]
-    players.append(Player("Benzema","Real Madrid"))
-    vinicius_jr=Player("Vinicius Jr","Real Madrid")
-    name_players.append(vinicius_jr.name)
-    players.append(vinicius_jr)
-    return name_players
 
 @app.get("/pichichi")
 def get_pichichi():
@@ -67,3 +45,24 @@ def get_general_clasification():
         "name": "Real Madrid",
         "points": 71        
     }]
+
+@app.get("/teams")
+def get_teams():
+    return repository_teams.get()
+
+@app.get("/random")
+def get_teams():
+    # This is a use case:
+    cosa=Team("Iván","Su casa")
+    repository_teams.add(cosa)
+    return repository_teams.get()
+
+@app.get("/players")
+def get_players():
+    players=[]
+    name_players=[]
+    players.append(Player("Benzema","Real Madrid"))
+    vinicius_jr=Player("Vinicius Jr","Real Madrid")
+    name_players.append(vinicius_jr.name)
+    players.append(vinicius_jr)
+    return name_players
