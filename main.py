@@ -6,6 +6,12 @@ from domain.team import Team
 from domain.match import Match
 from domain.player import Player
 from domain.team_repository import TeamRepository
+from domain.player_repository import PlayerRepository
+
+'''
+Responsabilidad: Enrutar y redirigir la petición a quien corresponda.
+'''
+
 app = FastAPI()
 print("API FOOTBALL")
 
@@ -59,10 +65,8 @@ def get_teams():
 
 @app.get("/players")
 def get_players():
-    players=[]
+    repository = PlayerRepository()
+    players = repository.get()
     name_players=[]
-    players.append(Player("Benzema","Real Madrid"))
-    vinicius_jr=Player("Vinicius Jr","Real Madrid")
-    name_players.append(vinicius_jr.name)
-    players.append(vinicius_jr)
-    return name_players
+    for player in players:
+        name_players.append(player.name)
